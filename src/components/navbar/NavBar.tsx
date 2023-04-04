@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Container from '@mui/material/Container';
-import {titleMinu,estilos} from "./styles"
+import {titleMinu} from "./styles"
 import { Avatar, Typography } from "@mui/material";
 import Link from "next/link";
 
@@ -22,8 +22,9 @@ const NavBar = ()=> {
                 transition: "all 0.45s ease-in-out",
                 cursor: "pointer"
             } }}>
-              <Link href="/" passHref>
+              <Link href="/" passHref style={{textDecoration:"none"}}>
                 <Typography
+                      color="primary"
                       sx={titleMinu}
                   >
                       MINUTENTAG CHALLENGE

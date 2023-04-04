@@ -2,7 +2,6 @@ export const footerBox={
     height:72,
     margin:0,
     backgroundColor:"white",
-    // display:"flex",
     justifyContent:"space-around",
     position: "fixed",
     left: 0,

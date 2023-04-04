@@ -8,7 +8,6 @@ import Container from '@mui/material/Container';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import { useRouter } from "next/router";
-// import Link from "next/link";
 
 const Header = ()=> {
     const router = useRouter();
@@ -19,11 +18,9 @@ const Header = ()=> {
         <Container maxWidth="xl" >
           <Toolbar disableGutters>
             <Box sx={{ flexGrow: 1}}>
-                {/* <Link href="/" passHref> */}
                     <IconButton sx={{ p: 1,marginRight:2 }} onClick={() => router.back()}>
                     <ArrowBackIcon sx={{color:"black"}} fontSize='large'/>
                     </IconButton>
-                {/* </Link> */}
             </Box>
             <Box sx={{ flexGrow: 1,}} >
                 <Box sx={{color:"black"}}>Detail</Box>
@@ -36,18 +33,6 @@ const Header = ()=> {
                 </IconButton>
               </Box>
             </Box>
-            {/* MOBILE  VIEW STARTS */}
-            {/* <Box sx={{  flexGrow:1,display: { xs: 'flex', md: 'none' } }}>
-              <IconButton sx={{ p: 0 }}>
-                  <MenuIcon sx={{color:"black"}} fontSize='large'/>
-              </IconButton>
-            </Box>
-            <Box sx={{display: { xs: 'flex', md: 'none' } }}>
-              <IconButton sx={{ p: 0 }}>
-                  <Avatar alt="Remy Sharp" src="/Michael1.svg" />
-              </IconButton>
-            </Box> */}
-            {/* MOBILE VIEW ENDS */}
           </Toolbar>
         </Container>
         </AppBar>

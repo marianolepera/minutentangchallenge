@@ -2,11 +2,6 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import stockPrice from "../../../constants/stock-price"
 import { StockAndPriceInterface } from '@/interfaces/products';
 
-// export interface StockAndPriceInterface  {
-//     stock: number
-//     price: number
-//   }
-
 export interface  IdStockPriceInterface {
     [id: string]: StockAndPriceInterface;
 }

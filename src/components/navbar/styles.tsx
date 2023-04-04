@@ -1,7 +1,7 @@
 export const titleMinu={
-    fontWeight:"24px",
+    fontWeight:700,
     lineHeight:"31.25px",
-    color:"black"
+    fontSize:"24px"
 
 }
 

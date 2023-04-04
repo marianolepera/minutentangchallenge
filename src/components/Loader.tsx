@@ -10,7 +10,7 @@ export default function Loader() {
         alignItems: "center",
         minHeight: "100vh",
         textAlign: "center"}}>
-      <CircularProgress size={150} color="secondary"/>
+      <CircularProgress size={150} color="primary"/>
     </Box>
   );
 }

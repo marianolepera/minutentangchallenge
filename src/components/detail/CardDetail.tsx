@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Box, Button, Card, CardActions, CardContent, CardMedia, Divider, FormControl, Grid, MenuItem, Typography } from "@mui/material"
+import { Box, Button, Divider, FormControl, Grid, MenuItem, Typography, useTheme } from "@mui/material"
 import Image from 'next/image'
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import LocalMallIcon from '@mui/icons-material/LocalMall';
@@ -15,6 +15,7 @@ interface CardProductDetailInterface {
 }
 
 const CardDetail:NextPage<CardProductDetailInterface> = ({product}:CardProductDetailInterface) =>{
+    const theme = useTheme();
     const [sku, setSku] = React.useState(product?.skus[0].code);
     const [isLoading, setIsLoading] = React.useState<boolean>(false);
     const [isError,setIsError] = React.useState<boolean>(false);
@@ -35,6 +36,12 @@ const CardDetail:NextPage<CardProductDetailInterface> = ({product}:CardProductDe
        
 
     }
+
+    const formatMoney = (price: any): string => {
+        const dollarsCents = price / 100;
+        const result=dollarsCents.toFixed(2)
+        return result;
+      }
 
     React.useEffect(() => {
         getProductByCode(parseInt(sku));
@@ -58,6 +65,20 @@ const CardDetail:NextPage<CardProductDetailInterface> = ({product}:CardProductDe
         return <Typography variant="h1"> Hubo un error al intentar cargar el producto</Typography>
     }
 
+    const modelSX={
+        fontWeight:700,
+        fontSize:"24px",
+        lineHeight:"31px",
+        color:"#0F0D23",
+        marginBottom:2
+    }
+    const moneySX={
+        color:(theme:any) => theme.palette.primary.main,
+        fontWeight:700,
+        fontSize:"24px",
+        lineHeight:"31px",
+        marginLeft:10
+    }
     return(
         <>
         <Grid container columns={12} spacing={2}>
@@ -65,14 +86,19 @@ const CardDetail:NextPage<CardProductDetailInterface> = ({product}:CardProductDe
             <Grid item  xs={12} sm={12} md={3} lg={3}>
                 <Image
                     alt="corona"
-                    src="/corona1.jpg"
-                    // quality={100}
-                    // fill
+                    src={`${product?.image}`}
                     width={200}
-                    height={200}
-                    // sizes="100vw"
+                    height={350}
+                    sizes="100vw"
                     style={{
-                    objectFit: 'cover',
+                        objectFit: 'cover',
+                        backgroundRepeat: 'no-repeat',
+                        backgroundPosition:"center center",
+                        backgroundSize:"100% 100%",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        height:"auto",
+                        maxHeight:"100%",
                     }}
                 />
             </Grid>
@@ -80,14 +106,14 @@ const CardDetail:NextPage<CardProductDetailInterface> = ({product}:CardProductDe
             </Divider>
             <Grid item  xs={12} sm={12} md={6} lg={6} >
                     <Box sx={{display:"flex"}}>
-                        <Typography sx={{marginBottom:1}}>{product?.brand}</Typography>
-                        <Typography> {}</Typography>
+                        <Typography sx={modelSX}>{product?.brand}</Typography>
+                        <Typography sx={moneySX}>$ {formatMoney(stockAndPrice?.price)}</Typography>
                     </Box>
-                    <Typography>Origin:  {product?.origin} |  Stock: {stockAndPrice?.stock}</Typography>
-                    <Typography sx={{my:1}}>Description</Typography>
-                    <Typography>{product?.information}</Typography>
+                    <Typography sx={{color:"#969696"}}>Origin:  {product?.origin} |  Stock: {stockAndPrice?.stock}</Typography>
+                    <Typography sx={{my:1,fontWeight:700}}>Description</Typography>
+                    <Typography sx={{color:"#969696"}}>{product?.information}</Typography>
                     <Box sx={{display:"flex",marginTop:2}}>
-                        <Box sx={{marginRight:5,p:1,marginTop:1}}>Size:</Box>
+                        <Typography sx={{marginRight:5,p:1,marginTop:1,fontWeight:700}}>Size:</Typography>
                         <FormControl fullWidth>
                             <Select
                             sx={{width:150}}
@@ -105,7 +131,7 @@ const CardDetail:NextPage<CardProductDetailInterface> = ({product}:CardProductDe
                     <Box sx={{display:"flex",marginTop:5}}>
                         <Button variant="outlined" startIcon={<LocalMallIcon />}>
                         </Button>
-                        <Button sx={{marginLeft:5}} variant="contained" >
+                        <Button sx={{marginLeft:5,width:247}} variant="contained" >
                             Add to cart
                         </Button>
                     </Box>

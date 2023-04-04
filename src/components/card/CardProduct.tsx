@@ -4,10 +4,9 @@ import CardMedia from '@mui/material/CardMedia';
 import CardActions from '@mui/material/CardActions';
 import { Box, Button,Typography,useTheme } from '@mui/material';
 import Product from '@/interfaces/products';
-import { CardActionArea } from '@mui/material';
 import { NextPage } from 'next'
 import Link from 'next/link';
-// import Link from 'next/link';
+import AddIcon from '@mui/icons-material/Add';
 
 interface CardProdudctInterface {
     product:Product
@@ -26,7 +25,6 @@ const  CardProduct:NextPage<CardProdudctInterface> =({product}:CardProdudctInter
         marginBottom:1,
         alignItems: "center",
         justifyContent: "center",
-        // [theme.breakpoints.down('md')]: {width:"155px",height:"300px"},
         [theme.breakpoints.down('md')]: {width:"220px",},
       }
 
@@ -34,16 +32,29 @@ const  CardProduct:NextPage<CardProdudctInterface> =({product}:CardProdudctInter
         backgroundRepeat: 'no-repeat',
         backgroundPosition:"center center",
         backgroundSize:"100% 100%",
-        // width:"auto",
         backgroundImage: `url("${product?.image}")`,
         alignItems: "center",
         justifyContent: "center",
         height:350,
         maxHeight:"100%",
         objectFit:"cover"
-
     }
-    // let getUrlLink = (): string => `/${product?.id}-${product?.brand.replace(' ', '-')}`;
+
+    const brandtitle={
+        padding:2,
+        fontWeight:700,
+        fontSize:"16px",
+        lineHeight:"16px",
+        color:"#323232"
+    }
+
+    const priceSX={
+        marginLeft:2,
+        fontWeight:700,
+        fontSize:"16px",
+        lineHeight:"16px",
+        color:"#323232"
+    }
 
   return (
     <>
@@ -51,26 +62,22 @@ const  CardProduct:NextPage<CardProdudctInterface> =({product}:CardProdudctInter
         style={{textDecoration:"none"}} 
         href={{
             pathname:`/${product?.id}-${product?.brand.replace(' ', '-')}`,
-            // query:{
-            //     productId:product?.id,
-            //     productBrand:product?.brand,
-            //     }
             }}
-        // as={"/"+ art._id} 
         passHref>
     <Card sx={cardSX}>
-      {/* <CardActionArea > */}
-      
-        <Typography sx={{p:1}}> {product?.brand}</Typography>
+        <Typography sx={brandtitle}> {product?.brand}</Typography>
         <CardMedia
             sx={cardImage}
         />
         <CardActions disableSpacing sx={{padding:0,justifyContent:"space-between",marginTop:2}} >
-            <Box sx={{marginLeft:2}}> $ 26.87</Box>
-            <Button variant="outlined">Agregar</Button>
+            <Typography sx={priceSX}> $ 26.87</Typography>
+            <Box sx={{display: { xs: 'none', md: 'flex' }}}>
+                <Button variant="contained">Agregar</Button>
+            </Box>
+            <Box sx={{display: { xs: 'flex', md: 'none' }}}>
+                <Button variant="contained"><AddIcon></AddIcon></Button>
+            </Box>
         </CardActions>
-        
-      {/* </CardActionArea> */}
     </Card>
     </Link>
     </>
